@@ -1,0 +1,30 @@
+<resources>
+
+    // Activity
+    <string name="app_name">Simple DB app</string>
+    <string name="action_settings">Settings</string>
+
+
+    //Main fragment
+    <string name="search">Поиск сотрудников</string>
+    <string name="add_employee">Добавить сотдрудника</string>
+
+
+    //Add_employee fragment
+    <string name="add_header">Добавление сотрудника</string>
+    <string name="hire_date">Дата найма:</string>
+    <string name="employee_name">Имя:</string>
+    <string name="employee_lastname">Фамилия:</string>
+    <string name="employee_fathername">Отчество:</string>
+    <string name="department_name">Название подразделения</string>
+
+    <string name="add_confirm_btn">Добавить</string>
+    <string name="cancel_btn">Отмена</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Search fragment
+
+
+</resources>
