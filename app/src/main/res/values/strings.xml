@@ -21,10 +21,18 @@
     <string name="add_confirm_btn">Добавить</string>
     <string name="cancel_btn">Отмена</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     //Search fragment
+
+    //Hints
+    <string name="hire_date_hint">Нажмите для выбора даты</string>
+
+    //Departments
+    <string-array name="Departments">
+        <item>department 1</item>
+        <item>department 2</item>
+        <item>department 3</item>
+    </string-array>
+
 
 
 </resources>

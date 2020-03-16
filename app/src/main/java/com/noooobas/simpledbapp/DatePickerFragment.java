@@ -34,9 +34,10 @@ public class DatePickerFragment extends DialogFragment
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Bundle bundle = new Bundle();
         bundle.putInt("year",year);
-        bundle.putInt("month",month);
+        bundle.putInt("month",month+1);
         bundle.putInt("day",day);
         NavHostFragment.findNavController(DatePickerFragment.this)
                 .navigate(R.id.action_datePickerFragment_to_addEmployee,bundle);
+
     }
 }

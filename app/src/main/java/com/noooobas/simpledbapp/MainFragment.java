@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 public class MainFragment extends Fragment {
 
@@ -22,21 +21,6 @@ public class MainFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        view.findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(MainFragment.this)
-                        .navigate(R.id.action_MainFragment_to_searchFragment);
-            }
-        });
-        view.findViewById(R.id.add_employee_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            NavHostFragment.findNavController(MainFragment.this)
-                    .navigate(R.id.action_MainFragment_to_addEmployee);
-            }
-        });
 
     }
 }

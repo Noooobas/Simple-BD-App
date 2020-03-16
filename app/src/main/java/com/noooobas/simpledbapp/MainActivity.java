@@ -7,13 +7,17 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.room.Database;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+        Spinner add_employee_spinner = findViewById(R.id.add_employee_spinner);
+        Spinner search_employee_spinner = findViewById(R.id.search_employee_spinner);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -54,4 +61,23 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    //Navigation
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.add_employee_btn:
+                navController.navigate(R.id.action_MainFragment_to_addEmployee);
+                break;
+            case R.id.search_btn:
+                navController.navigate(R.id.action_MainFragment_to_searchFragment);
+                break;
+            case R.id.tvHireDate:
+                navController.navigate(R.id.action_addEmployee_to_datePickerFragment);
+                break;
+
+        }
+
+    }
+
 }
