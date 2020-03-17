@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Space;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -23,6 +25,7 @@ public class AddEmployeeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     TextView tvDate;
+    Spinner add_employee_spinner;
 
 
 
@@ -71,6 +74,8 @@ public class AddEmployeeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_employee, container, false);
         tvDate = v.findViewById(R.id.tvHireDate);
+        add_employee_spinner = v.findViewById(R.id.add_employee_spinner);
+        MainActivity.setSpinnerAdapter(add_employee_spinner);
 
         return v;
     }

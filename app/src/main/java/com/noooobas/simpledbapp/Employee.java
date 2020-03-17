@@ -13,11 +13,13 @@ public class Employee {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
-    public String first_name;
+    public String firstName;
 
-    public String second_name;
+    public String secondName;
 
-    public boolean is_active;
+    public String fatherName;
+
+    public boolean isActive;
 
    // public Date hire_date;
 

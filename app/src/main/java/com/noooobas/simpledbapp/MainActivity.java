@@ -10,13 +10,18 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.Layout;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+    private static SpinnerAdapter spinnerAdapter;
     NavController navController;
 
     @Override
@@ -26,8 +31,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navController = Navigation.findNavController(this,R.id.nav_host_fragment);
-        Spinner add_employee_spinner = findViewById(R.id.add_employee_spinner);
-        Spinner search_employee_spinner = findViewById(R.id.search_employee_spinner);
+        //Spinner add_employee_spinner = findViewById(R.id.add_employee_spinner);
+        //Spinner search_employee_spinner = findViewById(R.id.search_employee_spinner);
+        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.departments, R.layout.support_simple_spinner_dropdown_item);
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -80,4 +87,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    public static void setSpinnerAdapter(Spinner departmentsSpinner){
+        departmentsSpinner.setAdapter(spinnerAdapter);
+
+    }
 }

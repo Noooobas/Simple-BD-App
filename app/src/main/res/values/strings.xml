@@ -22,15 +22,25 @@
     <string name="cancel_btn">Отмена</string>
 
     //Search fragment
+    <string name="start_date">С</string>
+    <string name="end_date">По</string>
+
 
     //Hints
     <string name="hire_date_hint">Нажмите для выбора даты</string>
 
     //Departments
-    <string-array name="Departments">
+    <string-array name="departments">
         <item>department 1</item>
         <item>department 2</item>
         <item>department 3</item>
+    </string-array>
+
+    //Search selector
+    <string-array name="search_selector">
+        <item>ФИО</item>
+        <item>отделу</item>
+        <item>работавшим в период</item>
     </string-array>
 
 
