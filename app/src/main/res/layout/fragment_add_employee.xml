@@ -27,7 +27,7 @@
         android:text="@string/employee_name" />
 
     <EditText
-        android:id="@+id/tvFirstName"
+        android:id="@+id/field_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -41,7 +41,7 @@
         android:text="@string/employee_lastname" />
 
     <EditText
-        android:id="@+id/lastname_filed"
+        android:id="@+id/field_lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -55,7 +55,7 @@
         android:text="@string/employee_fathername" />
 
     <EditText
-        android:id="@+id/tvFatherName"
+        android:id="@+id/field_fathername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -81,14 +81,14 @@
         android:text="@string/hire_date" />
 
     <TextView
-        android:id="@+id/tvHireDate"
+        android:id="@+id/field_hire_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:clickable="true"
         android:focusable="true"
         android:onClick="onClick"
-        android:text="@string/hire_date_hint"
+        android:text="@string/date_hint"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -102,6 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:onClick="onClick"
             android:text="@string/cancel_btn" />
 
         <Button

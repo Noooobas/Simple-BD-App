@@ -37,14 +37,7 @@
         android:id="@+id/addEmployeeFragment"
         android:name="com.noooobas.simpledbapp.AddEmployeeFragment"
         android:label="fragment_add_employee"
-        tools:layout="@layout/fragment_add_employee" >
-        <action
-            android:id="@+id/action_addEmployee_to_datePickerFragment"
-            app:destination="@id/datePickerFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        tools:layout="@layout/fragment_add_employee" />
     <dialog
         android:id="@+id/datePickerFragment"
         android:name="com.noooobas.simpledbapp.DatePickerFragment"
@@ -53,5 +46,13 @@
             android:id="@+id/action_datePickerFragment_to_addEmployee"
             app:destination="@id/addEmployeeFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_datePickerFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="isSearchCalled"
+            app:argType="boolean" />
     </dialog>
+    <action android:id="@+id/action_global_datePickerFragment"
+        app:destination="@id/datePickerFragment" />
 </navigation>

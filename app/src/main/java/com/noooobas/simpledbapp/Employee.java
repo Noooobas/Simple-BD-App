@@ -15,15 +15,15 @@ public class Employee {
 
     public String firstName;
 
-    public String secondName;
+    public String lastName;
 
     public String fatherName;
 
     public boolean isActive;
 
-   // public Date hire_date;
+   // public Date hireDate;
 
-    //public Date resig_date;
+    //public Date resigDate;
 
     @ColumnInfo(name = "department_id")
     public int departmentid;

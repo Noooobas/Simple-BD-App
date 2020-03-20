@@ -27,7 +27,7 @@
 
 
     //Hints
-    <string name="hire_date_hint">Нажмите для выбора даты</string>
+    <string name="date_hint">Нажмите для выбора даты</string>
 
     //Departments
     <string-array name="departments">

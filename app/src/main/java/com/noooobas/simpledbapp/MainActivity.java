@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.text.Layout;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,10 +18,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static SpinnerAdapter spinnerAdapter;
+    private int selectedDepartmentID;
     NavController navController;
+    NavGraphDirections.ActionGlobalDatePickerFragment callDatePicker = DatePickerFragmentDirections
+            .actionGlobalDatePickerFragment(true);
+    AppDatabase db;
+    String[] depList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navController = Navigation.findNavController(this,R.id.nav_host_fragment);
         //Spinner add_employee_spinner = findViewById(R.id.add_employee_spinner);
         //Spinner search_employee_spinner = findViewById(R.id.search_employee_spinner);
-        spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.departments, R.layout.support_simple_spinner_dropdown_item);
+        db = AppDatabase.getAppDatabase(this);
+        //TODO:Temporary
+        db.departmentsDAO().nukeTable();
+        //
+        fillDepartments();
+        depList = db.departmentsDAO().getDepartmentsList();
+        spinnerAdapter = new ArrayAdapter<String>
+                (this, R.layout.support_simple_spinner_dropdown_item,depList);
+
 
 
 
@@ -41,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "You shouldn't have done that", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -69,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    //Navigation
+    //Navigation except for datePicker
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -79,8 +92,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.search_btn:
                 navController.navigate(R.id.action_MainFragment_to_searchFragment);
                 break;
-            case R.id.tvHireDate:
-                navController.navigate(R.id.action_addEmployee_to_datePickerFragment);
+            case R.id.field_hire_date:
+                callDatePicker.setIsSearchCalled(false);
+                navController.navigate(callDatePicker);
+                break;
+            case R.id.field_end_date:
+            case R.id.field_start_date:
+                callDatePicker.setIsSearchCalled(true);
+                navController.navigate(callDatePicker);
+                break;
+            case  R.id.cancel_btn:
+                navController.popBackStack();
                 break;
 
         }
@@ -89,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+        selectedDepartmentID = i;
     }
 
     @Override
@@ -97,8 +119,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public static void setSpinnerAdapter(Spinner departmentsSpinner){
-        departmentsSpinner.setAdapter(spinnerAdapter);
+    public static void setSpinnerAdapter(Spinner spinner){
+        spinner.setAdapter(spinnerAdapter);
 
+    }
+
+    void fillDepartments(){
+        Departments dep1 = new Departments();
+        dep1.depart_name = "Отдел №1";
+        db.departmentsDAO().insert(dep1);
+
+        Departments dep2 = new Departments();
+        dep2.depart_name = "Отдел №2";
+        db.departmentsDAO().insert(dep2);
+
+        Departments dep3 = new Departments();
+        dep3.depart_name = "Отдел №3";
+        db.departmentsDAO().insert(dep3);
+    }
+
+    public int getDepartSpinnerPosition (){
+        return selectedDepartmentID;
     }
 }

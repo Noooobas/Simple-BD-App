@@ -1,5 +1,6 @@
 package com.noooobas.simpledbapp;
 
+import android.app.Application;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -15,13 +16,19 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
+
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
+    boolean searchIsCaller;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
+        searchIsCaller = DatePickerFragmentArgs
+                .fromBundle(getArguments()).getIsSearchCalled();
         final Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -36,8 +43,13 @@ public class DatePickerFragment extends DialogFragment
         bundle.putInt("year",year);
         bundle.putInt("month",month+1);
         bundle.putInt("day",day);
-        NavHostFragment.findNavController(DatePickerFragment.this)
+
+        if(searchIsCaller)
+        NavHostFragment.findNavController(this)
+                .navigate(R.id.action_datePickerFragment_to_searchFragment,bundle);
+        else NavHostFragment.findNavController(this)
                 .navigate(R.id.action_datePickerFragment_to_addEmployee,bundle);
 
     }
+
 }

@@ -17,57 +17,27 @@ import android.widget.TextView;
 import java.util.Objects;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class SearchFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
 
     Spinner searchDepartmentsSpinner,searchSelectorSpinner;
-    TextView tv_name,tv_lastname;
-    Layout lt_fathername,lt_lastname, lt_name;
+    TextView field_name,field_lastname,field_fathername, field_start_date, field_end_date;
+    int last_selected_option;
+
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,18 +49,20 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         searchDepartmentsSpinner = v.findViewById(R.id.search_departments_spinner);
         searchSelectorSpinner = v.findViewById(R.id.search_selector_spinner);
 
-        //Textviews
-        tv_name = v.findViewById(R.id.tv_name);
-        tv_lastname = v.findViewById(R.id.tv_lastname);
-
-        //Layouts
+        //Fields
+        field_name = v.findViewById(R.id.field_name);
+        field_lastname = v.findViewById(R.id.field_lastname);
+        field_fathername = v.findViewById(R.id.field_fathername);
+        field_start_date = v.findViewById(R.id.field_start_date);
+        field_end_date = v.findViewById(R.id.field_end_date);
 
 
         ArrayAdapter selectorSpinnerAdapter = ArrayAdapter
-                .createFromResource(Objects.requireNonNull(getContext()), R.array.search_selector,R.layout.support_simple_spinner_dropdown_item);
+                .createFromResource(Objects.requireNonNull(getActivity()), R.array.search_selector,R.layout.support_simple_spinner_dropdown_item);
 
         searchSelectorSpinner.setAdapter(selectorSpinnerAdapter);
         searchSelectorSpinner.setOnItemSelectedListener(this);
+
         MainActivity.setSpinnerAdapter(searchDepartmentsSpinner);
 
         return v;
@@ -98,51 +70,51 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View v, int i, long l) {
+     public void onResume() {
+        super.onResume();
+        if (getArguments() != null) {
+            searchSelectorSpinner.setSelection(2);
+        }
+    }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View v, int i, long l) {
+        last_selected_option = i;
         switch(i){
             case 0:
-                if (searchDepartmentsSpinner.getVisibility() == View.VISIBLE) {
-                    getActivity().findViewById(R.id.name_layout).setVisibility(View.VISIBLE);
-                    getActivity().findViewById(R.id.last_name_layout).setVisibility(View.VISIBLE);
-                    getActivity().findViewById(R.id.fathername_layout).setVisibility(View.VISIBLE);
-                    searchDepartmentsSpinner.setVisibility(View.GONE);
-                }
-                else {
-                    getActivity().findViewById(R.id.fathername_layout).setVisibility(View.VISIBLE);
-                }
-                if (tv_name.getText().equals(getString(R.string.start_date))) {
-                    tv_name.setText(R.string.employee_name);
-                    tv_lastname.setText(R.string.employee_fathername);
-                }
+                FIOOptionSelected();
                 break;
             case 1:
-                getActivity().findViewById(R.id.name_layout).setVisibility(View.GONE);
-                getActivity().findViewById(R.id.last_name_layout).setVisibility(View.GONE);
-                getActivity().findViewById(R.id.fathername_layout).setVisibility(View.GONE);
-                searchDepartmentsSpinner.setVisibility(View.VISIBLE);
+                departmentOptionSelected();
                 break;
             case 2:
-                if (searchDepartmentsSpinner.getVisibility() == View.VISIBLE){
-                    getActivity().findViewById(R.id.name_layout).setVisibility(View.VISIBLE);
-                    getActivity().findViewById(R.id.last_name_layout).setVisibility(View.VISIBLE);
-                    searchDepartmentsSpinner.setVisibility(View.GONE);
-                }
-                else {
-                    getActivity().findViewById(R.id.fathername_layout).setVisibility(View.GONE);
-                }
-                if (tv_name.getText().equals(getString(R.string.employee_name))) {
-                    tv_name.setText(R.string.start_date);
-                    tv_lastname.setText(R.string.end_date);
-                }
-
+               dateOptionSelected();
                 break;
         }
+
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    void FIOOptionSelected(){
+        getActivity().findViewById(R.id.FIO_layout).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.dates_layout).setVisibility(View.GONE);
+        searchDepartmentsSpinner.setVisibility(View.GONE);
+    }
+
+    void departmentOptionSelected(){
+        getActivity().findViewById(R.id.FIO_layout).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.dates_layout).setVisibility(View.GONE);
+        searchDepartmentsSpinner.setVisibility(View.VISIBLE);
+    }
+
+    void dateOptionSelected(){
+        getActivity().findViewById(R.id.FIO_layout).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.dates_layout).setVisibility(View.VISIBLE);
+        searchDepartmentsSpinner.setVisibility(View.GONE);
     }
 
 
