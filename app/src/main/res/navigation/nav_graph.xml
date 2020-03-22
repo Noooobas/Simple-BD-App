@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.noooobas.simpledbapp.MainFragment"
+        android:name="com.noooobas.simpledbapp.fragments.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
 
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.noooobas.simpledbapp.SearchFragment"
+        android:name="com.noooobas.simpledbapp.fragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <action
@@ -30,17 +30,17 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultsFragment"
-        android:name="com.noooobas.simpledbapp.SearchResultsFragment"
+        android:name="com.noooobas.simpledbapp.fragments.SearchResultsFragment"
         android:label="fragment_search_results_list"
         tools:layout="@layout/fragment_search_results_list" />
     <fragment
         android:id="@+id/addEmployeeFragment"
-        android:name="com.noooobas.simpledbapp.AddEmployeeFragment"
+        android:name="com.noooobas.simpledbapp.fragments.AddEmployeeFragment"
         android:label="fragment_add_employee"
         tools:layout="@layout/fragment_add_employee" />
     <dialog
         android:id="@+id/datePickerFragment"
-        android:name="com.noooobas.simpledbapp.DatePickerFragment"
+        android:name="com.noooobas.simpledbapp.fragments.DatePickerFragment"
         android:label="DatePickerFragment" >
         <action
             android:id="@+id/action_datePickerFragment_to_addEmployee"

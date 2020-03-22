@@ -1,9 +1,11 @@
-package com.noooobas.simpledbapp;
+package com.noooobas.simpledbapp.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.noooobas.simpledbapp.R;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

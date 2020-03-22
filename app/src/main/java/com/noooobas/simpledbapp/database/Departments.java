@@ -1,4 +1,4 @@
-package com.noooobas.simpledbapp;
+package com.noooobas.simpledbapp.database;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

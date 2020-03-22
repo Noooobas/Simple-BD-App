@@ -21,6 +21,8 @@
     <string name="add_confirm_btn">Добавить</string>
     <string name="cancel_btn">Отмена</string>
 
+    <string name="add_success">Сотрудник успешно добавлен</string>
+
     //Search fragment
     <string name="start_date">С</string>
     <string name="end_date">По</string>

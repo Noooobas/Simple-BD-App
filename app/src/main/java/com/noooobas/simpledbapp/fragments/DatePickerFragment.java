@@ -1,4 +1,4 @@
-package com.noooobas.simpledbapp;
+package com.noooobas.simpledbapp.fragments;
 
 import android.app.Application;
 import android.app.DatePickerDialog;
@@ -6,17 +6,11 @@ import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.TextView;
-
+import com.noooobas.simpledbapp.R;
 import java.util.Calendar;
-import java.util.Date;
+
 
 
 public class DatePickerFragment extends DialogFragment

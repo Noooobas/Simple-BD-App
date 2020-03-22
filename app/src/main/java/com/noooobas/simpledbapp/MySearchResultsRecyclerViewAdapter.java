@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.noooobas.simpledbapp.SearchResultsFragment.OnListFragmentInteractionListener;
+import com.noooobas.simpledbapp.fragments.SearchResultsFragment.OnListFragmentInteractionListener;
 import com.noooobas.simpledbapp.dummy.DummyContent.DummyItem;
 
 import java.util.List;

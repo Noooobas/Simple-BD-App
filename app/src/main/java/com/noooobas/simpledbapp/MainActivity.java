@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.noooobas.simpledbapp.database.AppDatabase;
+import com.noooobas.simpledbapp.database.Departments;
+import com.noooobas.simpledbapp.fragments.DatePickerFragmentDirections;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,21 +16,21 @@ import androidx.navigation.Navigation;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private static SpinnerAdapter spinnerAdapter;
-    private int selectedDepartmentID;
+public class MainActivity extends AppCompatActivity
+        implements View.OnClickListener {
+    DepartmentsSpinner depSpinner = new DepartmentsSpinner();
+    SpinnerAdapter spinnerAdapter;
     NavController navController;
     NavGraphDirections.ActionGlobalDatePickerFragment callDatePicker = DatePickerFragmentDirections
             .actionGlobalDatePickerFragment(true);
     AppDatabase db;
     String[] depList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +39,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navController = Navigation.findNavController(this,R.id.nav_host_fragment);
-        //Spinner add_employee_spinner = findViewById(R.id.add_employee_spinner);
-        //Spinner search_employee_spinner = findViewById(R.id.search_employee_spinner);
         db = AppDatabase.getAppDatabase(this);
         //TODO:Temporary
         db.departmentsDAO().nukeTable();
         //
         fillDepartments();
         depList = db.departmentsDAO().getDepartmentsList();
-        spinnerAdapter = new ArrayAdapter<String>
-                (this, R.layout.support_simple_spinner_dropdown_item,depList);
-
-
+        spinnerAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,depList);
+        depSpinner.getDepartmentsAdapter(spinnerAdapter);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -109,20 +108,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedDepartmentID = i;
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    public static void setSpinnerAdapter(Spinner spinner){
-        spinner.setAdapter(spinnerAdapter);
-
-    }
 
     void fillDepartments(){
         Departments dep1 = new Departments();
@@ -138,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         db.departmentsDAO().insert(dep3);
     }
 
-    public int getDepartSpinnerPosition (){
-        return selectedDepartmentID;
-    }
+
+
 }

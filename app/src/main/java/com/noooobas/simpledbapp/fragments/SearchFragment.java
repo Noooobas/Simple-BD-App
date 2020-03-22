@@ -1,11 +1,11 @@
-package com.noooobas.simpledbapp;
+package com.noooobas.simpledbapp.fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
 
-import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.noooobas.simpledbapp.DepartmentsSpinner;
+import com.noooobas.simpledbapp.R;
+
 import java.util.Objects;
 
 
@@ -21,9 +24,12 @@ import java.util.Objects;
 public class SearchFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
+    private static final String TAG = "Search fragment";
     Spinner searchDepartmentsSpinner,searchSelectorSpinner;
     TextView field_name,field_lastname,field_fathername, field_start_date, field_end_date;
-    int last_selected_option;
+    static int last_selected_option;
+    DepartmentsSpinner depSpinner;
+    boolean isStartDate;
 
 
     public SearchFragment() {
@@ -56,14 +62,13 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
         field_start_date = v.findViewById(R.id.field_start_date);
         field_end_date = v.findViewById(R.id.field_end_date);
 
-
         ArrayAdapter selectorSpinnerAdapter = ArrayAdapter
                 .createFromResource(Objects.requireNonNull(getActivity()), R.array.search_selector,R.layout.support_simple_spinner_dropdown_item);
 
         searchSelectorSpinner.setAdapter(selectorSpinnerAdapter);
         searchSelectorSpinner.setOnItemSelectedListener(this);
-
-        MainActivity.setSpinnerAdapter(searchDepartmentsSpinner);
+        depSpinner = new DepartmentsSpinner();
+        depSpinner.setDepartmentsAdapter(searchDepartmentsSpinner);
 
         return v;
 
@@ -72,8 +77,11 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
      public void onResume() {
         super.onResume();
+        searchSelectorSpinner.setSelection(last_selected_option);
+        Log.d(TAG, "onResume: "+last_selected_option);
+        depSpinner.setLastPosition(searchDepartmentsSpinner);
         if (getArguments() != null) {
-            searchSelectorSpinner.setSelection(2);
+            //TODO fill dates with values
         }
     }
 

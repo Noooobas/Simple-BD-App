@@ -1,6 +1,4 @@
-package com.noooobas.simpledbapp;
-
-import java.util.List;
+package com.noooobas.simpledbapp.database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

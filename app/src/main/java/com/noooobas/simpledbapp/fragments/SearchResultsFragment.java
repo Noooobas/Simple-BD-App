@@ -1,4 +1,4 @@
-package com.noooobas.simpledbapp;
+package com.noooobas.simpledbapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.noooobas.simpledbapp.MySearchResultsRecyclerViewAdapter;
+import com.noooobas.simpledbapp.R;
 import com.noooobas.simpledbapp.dummy.DummyContent;
 import com.noooobas.simpledbapp.dummy.DummyContent.DummyItem;
-
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
