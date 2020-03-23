@@ -30,6 +30,7 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
     static int last_selected_option;
     DepartmentsSpinner depSpinner;
     boolean isStartDate;
+    static Bundle save;
 
 
     public SearchFragment() {
@@ -49,26 +50,26 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_search, container, false);
+            View v = inflater.inflate(R.layout.fragment_search, container, false);
 
-        //Spinners
-        searchDepartmentsSpinner = v.findViewById(R.id.search_departments_spinner);
-        searchSelectorSpinner = v.findViewById(R.id.search_selector_spinner);
+            //Spinners
+            searchDepartmentsSpinner = v.findViewById(R.id.search_departments_spinner);
+            searchSelectorSpinner = v.findViewById(R.id.search_selector_spinner);
 
-        //Fields
-        field_name = v.findViewById(R.id.field_name);
-        field_lastname = v.findViewById(R.id.field_lastname);
-        field_fathername = v.findViewById(R.id.field_fathername);
-        field_start_date = v.findViewById(R.id.field_start_date);
-        field_end_date = v.findViewById(R.id.field_end_date);
+            //Fields
+            field_name = v.findViewById(R.id.field_name);
+            field_lastname = v.findViewById(R.id.field_lastname);
+            field_fathername = v.findViewById(R.id.field_fathername);
+            field_start_date = v.findViewById(R.id.field_start_date);
+            field_end_date = v.findViewById(R.id.field_end_date);
 
-        ArrayAdapter selectorSpinnerAdapter = ArrayAdapter
-                .createFromResource(Objects.requireNonNull(getActivity()), R.array.search_selector,R.layout.support_simple_spinner_dropdown_item);
+            ArrayAdapter selectorSpinnerAdapter = ArrayAdapter
+                    .createFromResource(Objects.requireNonNull(getActivity()), R.array.search_selector, R.layout.support_simple_spinner_dropdown_item);
 
-        searchSelectorSpinner.setAdapter(selectorSpinnerAdapter);
-        searchSelectorSpinner.setOnItemSelectedListener(this);
-        depSpinner = new DepartmentsSpinner();
-        depSpinner.setDepartmentsAdapter(searchDepartmentsSpinner);
+            searchSelectorSpinner.setAdapter(selectorSpinnerAdapter);
+            searchSelectorSpinner.setOnItemSelectedListener(this);
+            depSpinner = new DepartmentsSpinner();
+            depSpinner.setDepartmentsAdapter(searchDepartmentsSpinner);
 
         return v;
 
@@ -77,9 +78,9 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
     @Override
      public void onResume() {
         super.onResume();
-        searchSelectorSpinner.setSelection(last_selected_option);
+        //searchSelectorSpinner.setSelection(last_selected_option);
         Log.d(TAG, "onResume: "+last_selected_option);
-        depSpinner.setLastPosition(searchDepartmentsSpinner);
+        //depSpinner.setLastPosition(searchDepartmentsSpinner);
         if (getArguments() != null) {
             //TODO fill dates with values
         }

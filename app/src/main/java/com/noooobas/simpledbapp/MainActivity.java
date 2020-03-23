@@ -25,11 +25,15 @@ public class MainActivity extends AppCompatActivity
     DepartmentsSpinner depSpinner = new DepartmentsSpinner();
     SpinnerAdapter spinnerAdapter;
     NavController navController;
-    NavGraphDirections.ActionGlobalDatePickerFragment callDatePicker = DatePickerFragmentDirections
-            .actionGlobalDatePickerFragment(true);
+    public static final NavGraphDirections.ActionGlobalDatePickerFragment callDatePicker = DatePickerFragmentDirections
+            .actionGlobalDatePickerFragment();
     AppDatabase db;
     String[] depList;
 
+    //Codes for calling datePickerFragment
+    public static final int SET_HIRE_DATE_FIELD = 0;
+    public static final int SET_START_DATE_FIELD = 1;
+    public static final int SET_END_DATE_FIELD = 2;
 
 
     @Override
@@ -91,16 +95,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.search_btn:
                 navController.navigate(R.id.action_MainFragment_to_searchFragment);
                 break;
-            case R.id.field_hire_date:
-                callDatePicker.setIsSearchCalled(false);
-                navController.navigate(callDatePicker);
-                break;
-            case R.id.field_end_date:
-            case R.id.field_start_date:
-                callDatePicker.setIsSearchCalled(true);
-                navController.navigate(callDatePicker);
-                break;
-            case  R.id.cancel_btn:
+                case R.id.cancel_btn:
                 navController.popBackStack();
                 break;
 

@@ -3,6 +3,9 @@ package com.noooobas.simpledbapp.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.noooobas.simpledbapp.DepartmentsSpinner;
+import com.noooobas.simpledbapp.NavGraphDirections;
 import com.noooobas.simpledbapp.R;
 import com.noooobas.simpledbapp.database.Employee;
+
+import static com.noooobas.simpledbapp.MainActivity.SET_HIRE_DATE_FIELD;
+import static com.noooobas.simpledbapp.MainActivity.callDatePicker;
 
 
 public class AddEmployeeFragment extends Fragment implements View.OnClickListener {
@@ -23,9 +30,10 @@ public class AddEmployeeFragment extends Fragment implements View.OnClickListene
     Spinner add_employee_spinner;
     Button  add_confirm_btn;
     DepartmentsSpinner depSpinner;
-
-    int day,month, year;
-
+    NavGraphDirections.ActionGlobalDatePickerFragment action =
+            DatePickerFragmentDirections.actionGlobalDatePickerFragment();
+    int [] hireDate = new int[3];
+    DatePickerFragment datePicker = new DatePickerFragment();
 
 
     public AddEmployeeFragment() {
@@ -50,13 +58,17 @@ public class AddEmployeeFragment extends Fragment implements View.OnClickListene
         field_lastname = v.findViewById(R.id.field_lastname);
         field_name = v.findViewById(R.id.field_name);
 
+
+
         //Spinners
         add_employee_spinner = v.findViewById(R.id.add_employee_spinner);
         depSpinner = new DepartmentsSpinner();
         depSpinner.setDepartmentsAdapter(add_employee_spinner);
+
         //Buttons
         add_confirm_btn = v.findViewById(R.id.add_confirm_btn);
         add_confirm_btn.setOnClickListener(this);
+
         return v;
     }
 
@@ -64,13 +76,13 @@ public class AddEmployeeFragment extends Fragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
         depSpinner.setLastPosition(add_employee_spinner);
-        if (getArguments() != null) {
+        /*if (getArguments() != null) {
             year = getArguments().getInt("year");
             month = getArguments().getInt("month");
             day = getArguments().getInt("day");
             String date = (day + "." + month+ "." + year);
             field_hire_date.setText(date);
-        }
+        }*/
 
     }
 
@@ -89,7 +101,20 @@ public class AddEmployeeFragment extends Fragment implements View.OnClickListene
                 field_hire_date.setText("");
                 Toast.makeText(getActivity(),R.string.add_success,Toast.LENGTH_LONG).show();
                 break;
+            case R.id.field_hire_date:
+                callDatePicker.setFieldRequestCode(SET_HIRE_DATE_FIELD);
+                Navigation.findNavController(view).navigate(action);
+                break;
         }
     }
+
+    /*public static void passHireDate(){
+
+        hireDate[0] = datePicker.selectedDay;
+        hireDate[1] = datePicker.selectedMonth;
+        hireDate[2] = datePicker.selectedYear;
+        field_hire_date.setText(datePicker.stringDate);
+
+    }*/
 
 }

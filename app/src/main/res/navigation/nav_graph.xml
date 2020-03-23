@@ -50,8 +50,9 @@
             android:id="@+id/action_datePickerFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <argument
-            android:name="isSearchCalled"
-            app:argType="boolean" />
+            android:name="fieldRequestCode"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </dialog>
     <action android:id="@+id/action_global_datePickerFragment"
         app:destination="@id/datePickerFragment" />
